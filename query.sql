@@ -27,3 +27,7 @@ INNER JOIN likes
 GROUP BY photos.id
 ORDER BY likes DESC
 LIMIT 1;
+
+-- 5. Calculate avg number of photos per user
+-- total number of photos / total number of users
+SELECT (SELECT COUNT(*) FROM photos) / (SELECT COUNT(*) FROM users) AS avg;
