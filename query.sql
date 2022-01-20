@@ -31,3 +31,12 @@ LIMIT 1;
 -- 5. Calculate avg number of photos per user
 -- total number of photos / total number of users
 SELECT (SELECT COUNT(*) FROM photos) / (SELECT COUNT(*) FROM users) AS avg;
+
+-- 6. Most popular hastags
+
+SELECT tags.tag_name, COUNT(photo_tags.tag_id) AS total FROM photo_tags
+INNER JOIN tags
+    ON photo_tags.tag_id = tags.id
+GROUP BY tags.id
+ORDER BY total DESC
+LIMIT 5;
