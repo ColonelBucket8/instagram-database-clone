@@ -16,3 +16,14 @@ SELECT username FROM users
 LEFT JOIN photos
     ON users.id = photos.user_id
 WHERE photos.id IS NULL
+
+-- 4. Identify most popular photo (and user who created it)
+
+SELECT username, photos.id, image_url, COUNT(likes.photo_id) AS likes FROM users
+INNER JOIN photos
+    ON users.id = photos.user_id
+INNER JOIN likes
+    ON photos.id = likes.photo_id
+GROUP BY photos.id
+ORDER BY likes DESC
+LIMIT 1;
