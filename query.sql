@@ -40,3 +40,11 @@ INNER JOIN tags
 GROUP BY tags.id
 ORDER BY total DESC
 LIMIT 5;
+
+-- 7. Finding Bots - users who have liked every single photo
+
+SELECT username, COUNT(likes.user_id) AS total_likes FROM users
+INNER JOIN likes
+    ON users.id = likes.user_id
+GROUP BY likes.user_id
+HAVING total_likes = (SELECT COUNT(*) FROM photos);
